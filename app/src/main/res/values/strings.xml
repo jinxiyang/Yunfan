@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Yunfan</string>
+    <string name="app_name">云帆</string>
+
+    <string name="news">新闻</string>
+    <string name="chat">聊天</string>
+    <string name="me">我</string>
 </resources>

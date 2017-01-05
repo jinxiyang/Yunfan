@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yang.yunfan.ui.MainActivity">
+    android:background="?attr/mainBackground"
+    android:fitsSystemWindows="false"
+    android:orientation="vertical"
+    tools:context="com.yang.yunfan.ui.main.MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/contentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?attr/mainBackground"
+        />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bnv_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:layout_alignParentBottom="true"
+        android:elevation="8dp"
+        android:background="?attr/mainBackground"
+        app:itemIconTint="@color/main_navigation_color"
+        app:itemTextColor="@color/main_navigation_color"
+        app:menu="@menu/main_bottom_navigation_menu"
+        />
+</LinearLayout>
+
