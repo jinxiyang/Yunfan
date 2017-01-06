@@ -2,6 +2,8 @@ package com.yang.yunfan.ui.main;
 
 
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +11,13 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseFragment;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,5 +52,11 @@ public class MeFragment extends BaseFragment {
         AppCompatActivity activity = (AppCompatActivity) getContext();
         activity.getDelegate().setLocalNightMode(currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
         activity.recreate();
+
+//        int color = Math.random() > 0.5 ? Color.RED : Color.BLUE;
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            activity.getWindow().setStatusBarColor(color);
+//        }
+
     }
 }

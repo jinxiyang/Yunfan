@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
         bnvNavigation.getMenu().findItem(Integer.parseInt(fragmentTag)).setChecked(true);
         showFragment(fragmentTag);
+
     }
 
     //activity第一次显示时，此方法没有被调用

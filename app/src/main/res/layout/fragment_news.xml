@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:paddingTop="@dimen/status_bar_height"
+    android:background="@android:color/holo_red_light"
     tools:context="com.yang.yunfan.ui.main.NewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -9,6 +12,7 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:text="news" />
 
 </FrameLayout>

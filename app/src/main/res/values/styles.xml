@@ -12,4 +12,7 @@
         <item name="mainBackground">@color/backgroundColor</item>
     </style>
 
+    <style name="TransparentTheme" parent="AppTheme">
+    </style>
+
 </resources>

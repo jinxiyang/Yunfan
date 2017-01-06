@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/mainBackground"
     tools:context="com.yang.yunfan.ui.main.ChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="message" />
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@android:color/darker_gray"/>
 
-</FrameLayout>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+</LinearLayout>
