@@ -6,4 +6,11 @@
 
     <color name="textColor">#a72b55</color>
     <color name="backgroundColor">#3b3b3b</color>
+
+    <color name="whiteContentBackground">#252525</color>
+    <color name="grayContentBackground">#1b1b1b</color>
+    <color name="blackTextColor">#707070</color>
+    <color name="grayTextColor">#707070</color>
+    <color name="whiteTextColor">#cacaca</color>
+    <color name="grayLineColor">#707070</color>
 </resources>

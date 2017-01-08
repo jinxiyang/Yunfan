@@ -6,4 +6,11 @@
 
     <color name="textColor">#FF000000</color>
     <color name="backgroundColor">#FFFFFF</color>
+
+    <color name="whiteContentBackground">#FFFFFF</color>
+    <color name="grayContentBackground">#f4f5f6</color>
+    <color name="blackTextColor">#222222</color>
+    <color name="grayTextColor">#9e9e9e</color>
+    <color name="whiteTextColor">#FFFFFF</color>
+    <color name="grayLineColor">#e8e8e8</color>
 </resources>

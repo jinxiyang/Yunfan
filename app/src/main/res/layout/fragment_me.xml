@@ -11,6 +11,7 @@
        android:layout_height="wrap_content"
        android:layout_gravity="center"
        android:text="日间/夜间"
+       android:textColor="?attr/black_text_color"
        />
 
 </FrameLayout>

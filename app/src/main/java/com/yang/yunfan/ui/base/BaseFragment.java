@@ -54,6 +54,12 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LogUtil.i(TAG + "------" + "onCreateView");
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         LogUtil.i(TAG + "------" + "onStart");

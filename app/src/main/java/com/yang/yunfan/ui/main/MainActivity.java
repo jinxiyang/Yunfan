@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseActivity;
+import com.yang.yunfan.utils.MiuiUtil;
 
 import java.util.List;
 
@@ -42,7 +43,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     //activity第一次显示时，此方法没有被调用
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        showFragment(item.getItemId() + "");
+        String tag = item.getItemId() + "";
+        if (!tag.equals(fragmentTag)){
+            if (fragmentTag.equals(R.id.menu_chat + "")){
+                MiuiUtil.clearBlackStatusText(getWindow());
+            }
+            if (tag.equals(R.id.menu_chat + "")){
+                MiuiUtil.blackStatusText(getWindow());
+            }
+        }
+        showFragment(tag);
         return true;
     }
 
@@ -65,17 +75,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             ft.add(R.id.contentFrame, fragment, tag);
         }
 
-        Fragment currFragment = null;
+        Fragment currFragment  = null;
         List<Fragment> fragments = fm.getFragments();
-        if (fragments != null) {
+        if (fragments != null){
             for (Fragment f : fragments){
-                if (f.isVisible() && !f.isHidden()){
+                if (f.isVisible() && ! f.isHidden()){
                     currFragment = f;
                     break;
                 }
             }
         }
-
         fragmentTag = tag;
         if (currFragment != null){
             if (currFragment == fragment){

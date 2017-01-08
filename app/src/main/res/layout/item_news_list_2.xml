@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/clickable_white_bg_with_ripple"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:clickable="true"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_1"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        app:actualImageScaleType="centerCrop"
+        app:fadeDuration="0"
+        app:placeholderImage="@drawable/placeholder"
+        app:placeholderImageScaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/black_text_color"
+        android:textSize="@dimen/text_size_subhead_material"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/sdv_1"
+        android:layout_marginRight="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_alignParentLeft="true"
+        android:textColor="?attr/gray_text_color"
+        android:textSize="@dimen/text_size_caption_material"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_author_name"
+        android:layout_toLeftOf="@id/sdv_1"
+        android:layout_marginRight="10dp"
+        android:textColor="?attr/gray_text_color"
+        android:textSize="@dimen/text_size_caption_material"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/sdv_1"
+        android:layout_marginTop="10dp"
+        android:background="?attr/gray_line_color"/>
+
+</RelativeLayout>

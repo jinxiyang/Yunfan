@@ -1,14 +1,19 @@
 package com.yang.yunfan.ui.main;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseFragment;
+import com.yang.yunfan.utils.MiuiUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,12 +25,25 @@ public class ChatFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: " + MiuiUtil.isXiaomiPhone() + "      " + MiuiUtil.getMinuiRomVersion());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        View statusBar = view.findViewById(R.id.status_bar);
+        String minuiRomVersion = MiuiUtil.getMinuiRomVersion();
+        if (!TextUtils.isEmpty(minuiRomVersion) && (minuiRomVersion.compareToIgnoreCase("V6") >= 0)){
+            statusBar.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
+        return view;
     }
+
+
 
 }
