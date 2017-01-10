@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.yang.yunfan.R;
+import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.ui.base.BaseFragment;
 import com.yang.yunfan.utils.MiuiUtil;
 
@@ -44,10 +45,7 @@ public class MeFragment extends BaseFragment {
 
     @OnClick(R.id.btn_daynight)
     public void onClick() {
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        AppCompatActivity activity = (AppCompatActivity) getContext();
-        activity.getDelegate().setLocalNightMode(currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        activity.recreate();
+        DayNightManager.switchDayNight((AppCompatActivity) getContext());
 
 //        int color = Math.random() > 0.5 ? Color.RED : Color.BLUE;
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

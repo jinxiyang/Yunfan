@@ -1,15 +1,11 @@
 package com.yang.yunfan.ui.news;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.yang.yunfan.R;
+import com.yang.yunfan.ui.base.BaseActivity;
 
-public class EditNewsChannelActivity extends AppCompatActivity {
+public class EditNewsChannelActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

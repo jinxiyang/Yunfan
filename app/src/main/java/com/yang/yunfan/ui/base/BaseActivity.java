@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.yang.yunfan.R;
+import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.utils.LogUtil;
 
 import icepick.Icepick;
@@ -190,15 +191,5 @@ public class BaseActivity extends AppCompatActivity{
             progressDialog.dismiss();
             progressDialog = null;
         }
-    }
-
-
-    /**
-     * 切换主题
-     */
-    private void switchDayNight() {
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        getDelegate().setLocalNightMode(currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        recreate();
     }
 }
