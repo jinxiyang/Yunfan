@@ -8,7 +8,6 @@
     <dimen name="load_more_footer_height">60dp</dimen>
 
 
-
     <dimen name="text_size_body_1_material">14sp</dimen>
     <dimen name="text_size_body_2_material">14sp</dimen>
     <dimen name="text_size_button_material">14sp</dimen>
@@ -24,4 +23,5 @@
     <dimen name="text_size_small_material">14sp</dimen>
     <dimen name="text_size_subhead_material">16sp</dimen>
     <dimen name="text_size_title_material">20sp</dimen>
+    <dimen name="title_bar_height">45dp</dimen>
 </resources>

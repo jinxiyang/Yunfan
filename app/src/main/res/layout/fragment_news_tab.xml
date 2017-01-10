@@ -4,7 +4,7 @@
     android:id="@+id/swipeToLoadLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/gray_content_background"
+    android:background="?attr/grayContentBackground"
     app:swipe_style="classic"
     tools:context="com.yang.yunfan.ui.news.NewsTabFragment">
 

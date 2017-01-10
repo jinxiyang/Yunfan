@@ -19,7 +19,7 @@ public class AppApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //日间/夜间模式
+        //设置默认主题：日间（不是夜间）
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         //保存和恢复状态的日志

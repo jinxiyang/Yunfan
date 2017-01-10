@@ -7,21 +7,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <!--日/夜间主题颜色-->
+        <item name="whiteContentBackground">@color/whiteContentBackground</item>
+        <item name="grayContentBackground">@color/grayContentBackground</item>
+        <item name="blackTextColor">@color/blackTextColor</item>
+        <item name="grayTextColor">@color/grayTextColor</item>
+        <item name="whiteTextColor">@color/whiteTextColor</item>
+        <item name="grayLineColor">@color/grayLineColor</item>
 
-        <item name="android:textColor">@color/textColor</item>
 
-        <item name="white_content_background">@color/whiteContentBackground</item>
-        <item name="gray_content_background">@color/grayContentBackground</item>
-        <item name="black_text_color">@color/blackTextColor</item>
-        <item name="gray_text_color">@color/grayTextColor</item>
-        <item name="white_text_color">@color/whiteTextColor</item>
-        <item name="gray_line_color">@color/grayLineColor</item>
     </style>
 
     <style name="TransparentTheme" parent="AppTheme"></style>
 
+
+    <!--首页新闻频道的字体大小-->
     <style name="NewsChannelAppearance">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="BlackStatusTextColorTheme" parent="AppTheme">
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

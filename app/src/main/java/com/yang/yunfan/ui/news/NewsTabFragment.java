@@ -1,6 +1,7 @@
 package com.yang.yunfan.ui.news;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
@@ -22,6 +23,7 @@ import com.yang.yunfan.model.ResponeJH;
 import com.yang.yunfan.model.ResultJH;
 import com.yang.yunfan.source.ToutiaoNewsRemoteDataSourceImpl;
 import com.yang.yunfan.ui.base.LazyLoadFragment;
+import com.yang.yunfan.ui.browser.BrowserActivity;
 import com.yang.yunfan.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -91,7 +93,13 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
         adapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                ToastUtil.showShort(datas.get(position).getTitle().substring(0, 3));
+                News news = datas.get(position);
+                Intent intent = new Intent(getContext(), BrowserActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(BrowserActivity.URL, news.getUrl());
+                bundle.putString(BrowserActivity.TITLE, news.getTitle());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

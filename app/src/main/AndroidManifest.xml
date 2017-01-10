@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yang.yunfan">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".AppApplication"
@@ -22,7 +22,10 @@
         </activity>
         <activity
             android:name=".ui.news.EditNewsChannelActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.browser.BrowserActivity"
+            android:theme="@style/BlackStatusTextColorTheme"
+            />
     </application>
 
 </manifest>

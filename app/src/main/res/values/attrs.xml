@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="mainBackground" format="color|reference"/>
-    <attr name="white_content_background" format="color|reference"/>
-    <attr name="gray_content_background" format="color|reference"/>
-    <attr name="black_text_color" format="color|reference"/>
-    <attr name="gray_text_color" format="color|reference"/>
-    <attr name="white_text_color" format="color|reference"/>
-    <attr name="gray_line_color" format="color|reference"/>
+    <attr name="whiteContentBackground" format="color|reference"/>
+    <attr name="grayContentBackground" format="color|reference"/>
+    <attr name="blackTextColor" format="color|reference"/>
+    <attr name="grayTextColor" format="color|reference"/>
+    <attr name="whiteTextColor" format="color|reference"/>
+    <attr name="grayLineColor" format="color|reference"/>
+
 </resources>

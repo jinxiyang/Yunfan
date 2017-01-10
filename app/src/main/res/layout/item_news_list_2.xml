@@ -26,7 +26,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="?attr/black_text_color"
+        android:textColor="?attr/blackTextColor"
         android:textSize="@dimen/text_size_subhead_material"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
         android:layout_alignParentLeft="true"
-        android:textColor="?attr/gray_text_color"
+        android:textColor="?attr/grayTextColor"
         android:textSize="@dimen/text_size_caption_material"
         android:layout_marginTop="15dp"
         />
@@ -51,7 +51,7 @@
         android:layout_alignBaseline="@id/tv_author_name"
         android:layout_toLeftOf="@id/sdv_1"
         android:layout_marginRight="10dp"
-        android:textColor="?attr/gray_text_color"
+        android:textColor="?attr/grayTextColor"
         android:textSize="@dimen/text_size_caption_material"
         />
 
@@ -60,6 +60,6 @@
         android:layout_height="1px"
         android:layout_below="@id/sdv_1"
         android:layout_marginTop="10dp"
-        android:background="?attr/gray_line_color"/>
+        android:background="?attr/grayLineColor"/>
 
 </RelativeLayout>
