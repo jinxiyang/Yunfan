@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/grayContentBackground"
-    tools:context="com.yang.yunfan.ui.browser.BrowserActivity">
+    android:fitsSystemWindows="true"
+    tools:context="com.yang.yunfan.ui.news.NewsDetailActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
@@ -15,25 +16,20 @@
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:lines="1"
-            android:maxEms="8"
-            android:textColor="#ffffff"
-            android:textSize="22sp" />
-    </android.support.v7.widget.Toolbar>
 
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tool_bar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="?attr/grayLineColor"
+        android:layout_below="@id/tool_bar"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -22,10 +22,10 @@
         </activity>
         <activity
             android:name=".ui.news.EditNewsChannelActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ui.browser.BrowserActivity"
-            android:theme="@style/BlackStatusTextColorTheme"
-            />
+            android:theme="@style/WhiteStatusAppTheme" />
+        <activity
+            android:name=".ui.news.NewsDetailActivity"
+            android:theme="@style/WhiteStatusAppTheme" />
     </application>
 
 </manifest>

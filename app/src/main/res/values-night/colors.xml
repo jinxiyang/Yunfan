@@ -13,4 +13,7 @@
     <color name="grayTextColor">#707070</color>
     <color name="whiteTextColor">#cacaca</color>
     <color name="grayLineColor">#707070</color>
+    <color name="grayStatusColor">#1a1a1a</color>
+    <color name="whiteStatusColor">#1a1a1a</color>
+    <color name="whiteTitleBarColor">#242424</color>
 </resources>

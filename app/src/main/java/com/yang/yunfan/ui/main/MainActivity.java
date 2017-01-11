@@ -1,17 +1,18 @@
 package com.yang.yunfan.ui.main;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.view.MenuItem;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseActivity;
-import com.yang.yunfan.utils.MiuiUtil;
+import com.yang.yunfan.utils.LogUtil;
+import com.yang.yunfan.utils.ToastUtil;
 
 import java.util.List;
 
@@ -19,80 +20,79 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import icepick.State;
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements OnTabSelectListener, OnTabReselectListener {
 
-    @BindView(R.id.bnv_navigation)
-    BottomNavigationView bnvNavigation;
+    @State
+    int currIndex = -1;//当前fragment的index
 
-    @State String fragmentTag;
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        bnvNavigation.setOnNavigationItemSelectedListener(this);
-        if (TextUtils.isEmpty(fragmentTag)){
-            fragmentTag = R.id.menu_news + "";//默认显示第一个
-        }
-        bnvNavigation.getMenu().findItem(Integer.parseInt(fragmentTag)).setChecked(true);
-        showFragment(fragmentTag);
 
+        bottomBar.setOnTabSelectListener(this);
+        bottomBar.setOnTabReselectListener(this);
+
+        if (currIndex == -1) {
+            currIndex = R.id.tab_news;//默认显示第一个
+        }
+        bottomBar.setDefaultTab(currIndex);
+        bottomBar.setDefaultTabPosition(0);
     }
 
-    //activity第一次显示时，此方法没有被调用
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        String tag = item.getItemId() + "";
-        if (!tag.equals(fragmentTag)){
-            if (fragmentTag.equals(R.id.menu_chat + "")){
-                MiuiUtil.clearBlackStatusText(getWindow());
-            }
-            if (tag.equals(R.id.menu_chat + "")){
-                MiuiUtil.blackStatusText(getWindow());
-            }
-        }
-        showFragment(tag);
-        return true;
-    }
-
-    private void showFragment(String  tag){
+    private void showFragment(int id) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment fragment = fm.findFragmentByTag(tag);
-        if (fragment == null){
-            switch (Integer.parseInt(tag)){
-                case R.id.menu_news:
-                    fragment = new NewsFragment();
-                    break;
-                case R.id.menu_chat:
-                    fragment = new ChatFragment();
-                    break;
-                case R.id.menu_me:
-                    fragment = new MeFragment();
-                    break;
-            }
-            ft.add(R.id.contentFrame, fragment, tag);
+        Fragment fragment = fm.findFragmentByTag(id + "");
+        if (fragment == null) {
+            fragment = createFragment(id);
+            ft.add(R.id.contentFrame, fragment, id + "");
         }
-
-        Fragment currFragment  = null;
         List<Fragment> fragments = fm.getFragments();
-        if (fragments != null){
-            for (Fragment f : fragments){
-                if (f.isVisible() && ! f.isHidden()){
-                    currFragment = f;
-                    break;
+        if (fragments != null) {
+            for (Fragment f : fragments) {
+                if (f != fragment && f.isVisible() && !f.isHidden()) {
+                    ft.hide(f);
                 }
             }
         }
-        fragmentTag = tag;
-        if (currFragment != null){
-            if (currFragment == fragment){
-                return;
-            }
-            ft.hide(currFragment).show(fragment).commit();
-        }else {
-            ft.show(fragment).commit();
+        currIndex = id;
+        ft.show(fragment).commit();
+    }
+
+    private Fragment createFragment(int id) {
+        Fragment fragment = null;
+        switch (id) {
+            case R.id.tab_news:
+                fragment = new NewsFragment();
+                break;
+            case R.id.tab_video:
+                fragment = new VideoFragment();
+                break;
+            case R.id.tab_chat:
+                fragment = new ChatFragment();
+                break;
+            case R.id.tab_me:
+                fragment = new MeFragment();
+                break;
         }
+        return fragment;
+    }
+
+
+    @Override
+    public void onTabReSelected(@IdRes int tabId) {
+        LogUtil.i(tabId + "onTabReSelected");
+    }
+
+    @Override
+    public void onTabSelected(@IdRes int tabId) {
+        LogUtil.i(tabId + "onTabSelected");
+        showFragment(tabId);
     }
 }

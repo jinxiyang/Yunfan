@@ -36,11 +36,6 @@ public class ChatFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-        View statusBar = view.findViewById(R.id.status_bar);
-        String minuiRomVersion = MiuiUtil.getMinuiRomVersion();
-        if (!TextUtils.isEmpty(minuiRomVersion) && (minuiRomVersion.compareToIgnoreCase("V6") >= 0)){
-            statusBar.setBackgroundColor(Color.parseColor("#ffffff"));
-        }
         return view;
     }
 

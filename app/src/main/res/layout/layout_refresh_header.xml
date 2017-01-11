@@ -15,7 +15,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="48dp"
             android:layout_toLeftOf="@+id/tvRefresh"
-            android:background="@drawable/pull_arrow" />
+            android:src="@drawable/pull_arrow" />
 
         <ImageView
             android:id="@+id/ivSuccess"
@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="48dp"
             android:layout_toLeftOf="@+id/tvRefresh"
-            android:background="@drawable/refresh_success" />
+            android:src="@drawable/refresh_success" />
 
         <ProgressBar
             android:id="@+id/progressbar"

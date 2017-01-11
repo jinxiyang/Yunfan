@@ -6,6 +6,10 @@
         android:icon="@drawable/navigation_news"
         android:title="@string/news" />
     <item
+        android:id="@+id/menu_video"
+        android:icon="@drawable/navigation_video"
+        android:title="@string/video" />
+    <item
         android:id="@+id/menu_chat"
         android:icon="@drawable/navigation_chat"
         android:title="@string/chat" />

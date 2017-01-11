@@ -3,7 +3,7 @@
     <style name="BlackStatusTextColorTheme" parent="AppTheme">
         <item name="android:windowLightStatusBar">true</item>
 
-        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimary">@color/whiteContentBackground</item>
         <item name="colorPrimaryDark">@color/grayContentBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>

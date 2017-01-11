@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_news"
+        icon="@drawable/navigation_news"
+        title="@string/news"/>
+    <tab
+        id="@+id/tab_video"
+        icon="@drawable/navigation_video"
+        title="@string/video"/>
+    <tab
+        id="@+id/tab_chat"
+        icon="@drawable/navigation_chat"
+        title="@string/chat"/>
+    <tab
+        id="@+id/tab_me"
+        icon="@drawable/navigation_me"
+        title="@string/me"/>
+
+</tabs>

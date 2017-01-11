@@ -4,17 +4,13 @@ package com.yang.yunfan.ui.news;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yang.yunfan.R;
@@ -23,8 +19,6 @@ import com.yang.yunfan.model.ResponeJH;
 import com.yang.yunfan.model.ResultJH;
 import com.yang.yunfan.source.ToutiaoNewsRemoteDataSourceImpl;
 import com.yang.yunfan.ui.base.LazyLoadFragment;
-import com.yang.yunfan.ui.browser.BrowserActivity;
-import com.yang.yunfan.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,10 +88,9 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
             @Override
             public void onItemClick(View v, int position) {
                 News news = datas.get(position);
-                Intent intent = new Intent(getContext(), BrowserActivity.class);
+                Intent intent = new Intent(getContext(), NewsDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(BrowserActivity.URL, news.getUrl());
-                bundle.putString(BrowserActivity.TITLE, news.getTitle());
+                bundle.putString(NewsDetailActivity.URL, news.getUrl());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

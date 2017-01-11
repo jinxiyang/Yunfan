@@ -64,4 +64,18 @@ public class DayNightManager {
         int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES;
     }
+
+
+    /**
+     * 初始化app的主题UiMode，在application的onCreate中执行
+     * @param context
+     * @return
+     */
+    public static void initAppUiMode(Context context){
+        //设置默认主题：日间（不是夜间）
+        int uiMode = DayNightManager.getUiModeFromSp(context);
+        AppCompatDelegate.setDefaultNightMode(uiMode == AppCompatDelegate.MODE_NIGHT_YES ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+    }
+
 }

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
 
 import com.yang.yunfan.R;
 import com.yang.yunfan.manager.DayNightManager;
@@ -191,5 +192,16 @@ public class BaseActivity extends AppCompatActivity{
             progressDialog.dismiss();
             progressDialog = null;
         }
+    }
+
+    public void lightStatusBar(boolean b){
+        View decor = getWindow().getDecorView();
+        int ui = decor.getSystemUiVisibility();
+        if (b) {
+            ui |=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        } else {
+            ui &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        }
+        decor.setSystemUiVisibility(ui);
     }
 }

@@ -7,24 +7,24 @@
     android:background="?attr/grayContentBackground"
     tools:context="com.yang.yunfan.ui.main.MainActivity">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bnv_navigation"
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:elevation="8dp"
         android:background="?attr/whiteContentBackground"
-        app:itemIconTint="@color/main_navigation_color"
-        app:itemTextColor="@color/main_navigation_color"
-        app:menu="@menu/main_bottom_navigation_menu"
-        />
+        app:bb_activeTabColor="@android:color/holo_red_light"
+        app:bb_inActiveTabColor="@android:color/darker_gray"
+        app:bb_showShadow="false"
+        app:bb_tabXmlResource="@xml/main_bottombar" />
 
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_above="@id/bnv_navigation"
+        android:layout_above="@id/bottomBar"
         android:background="?attr/grayLineColor"/>
+
 
     <FrameLayout
         android:id="@+id/contentFrame"

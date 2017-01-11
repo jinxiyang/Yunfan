@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout;
 import com.yang.yunfan.R;
+import com.yang.yunfan.manager.DayNightManager;
 
 /**
  * Created by yang on 2017/1/8.
@@ -65,12 +66,12 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
-        tvRefresh.setText("REFRESHING");
+        tvRefresh.setText("刷新中……");
     }
 
     @Override
     public void onPrepare() {
-        Log.d("TwitterRefreshHeader", "onPrepare()");
+        Log.d("RefreshHeaderView", "onPrepare()");
     }
 
     @Override
@@ -80,7 +81,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
             progressBar.setVisibility(GONE);
             ivSuccess.setVisibility(GONE);
             if (y > mHeaderHeight) {
-                tvRefresh.setText("RELEASE TO REFRESH");
+                tvRefresh.setText("松开即可刷新");
                 if (!rotated) {
                     ivArrow.clearAnimation();
                     ivArrow.startAnimation(rotateUp);
@@ -93,14 +94,14 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
                     rotated = false;
                 }
 
-                tvRefresh.setText("SWIPE TO REFRESH");
+                tvRefresh.setText("下拉刷新");
             }
         }
     }
 
     @Override
     public void onRelease() {
-        Log.d("TwitterRefreshHeader", "onRelease()");
+        Log.d("RefreshHeaderView", "onRelease()");
     }
 
     @Override
@@ -110,7 +111,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(GONE);
-        tvRefresh.setText("COMPLETE");
+        tvRefresh.setText("刷新完成");
     }
 
     @Override

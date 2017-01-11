@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:actionBarSize">@dimen/title_bar_height</item>
+
         <!--日/夜间主题颜色-->
         <item name="whiteContentBackground">@color/whiteContentBackground</item>
         <item name="grayContentBackground">@color/grayContentBackground</item>
@@ -14,8 +16,16 @@
         <item name="grayTextColor">@color/grayTextColor</item>
         <item name="whiteTextColor">@color/whiteTextColor</item>
         <item name="grayLineColor">@color/grayLineColor</item>
+        <item name="grayStatusColor">@color/grayStatusColor</item>
+        <item name="whiteStatusColor">@color/whiteStatusColor</item>
+        <item name="whiteTitleBarColor">@color/whiteTitleBarColor</item>
 
+    </style>
 
+    <style name="WhiteStatusAppTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/whiteTitleBarColor</item>
+        <item name="colorPrimaryDark">@color/grayStatusColor</item>
     </style>
 
     <style name="TransparentTheme" parent="AppTheme"></style>
@@ -26,8 +36,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="BlackStatusTextColorTheme" parent="AppTheme">
-    </style>
+    <style name="BlackStatusTextColorTheme" parent="AppTheme"></style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

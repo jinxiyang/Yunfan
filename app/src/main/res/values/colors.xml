@@ -13,6 +13,9 @@
     <color name="grayTextColor">#9e9e9e</color>
     <color name="whiteTextColor">#FFFFFF</color>
     <color name="grayLineColor">#e8e8e8</color>
+    <color name="grayStatusColor">#bdbdbd</color>
+    <color name="whiteStatusColor">#ffffff</color>
+    <color name="whiteTitleBarColor">#ffffff</color>
 
 
     <color name="progress_backgound_color">#00000000</color>

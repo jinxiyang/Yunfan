@@ -6,5 +6,7 @@
     <attr name="grayTextColor" format="color|reference"/>
     <attr name="whiteTextColor" format="color|reference"/>
     <attr name="grayLineColor" format="color|reference"/>
-
+    <attr name="grayStatusColor" format="color|reference"/>
+    <attr name="whiteStatusColor" format="color|reference"/>
+    <attr name="whiteTitleBarColor" format="color|reference"/>
 </resources>
