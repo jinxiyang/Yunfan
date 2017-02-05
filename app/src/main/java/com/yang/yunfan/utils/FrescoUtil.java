@@ -4,12 +4,10 @@ import android.content.Context;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import com.yang.yunfan.BuildConfig;
-import com.yang.yunfan.http.AppHttpClient;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +29,11 @@ public class FrescoUtil {
             listeners.add(new RequestLoggingListener());
         }
         //使用OKhttp作为fresco的图片请求client
-        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory.newBuilder(context, AppHttpClient.getInstance().getOkHttpClient())
+//        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory.newBuilder(context, AppHttpClient.getInstance().getOkHttpClient())
+//                .setRequestListeners(listeners)
+//                .build();
+
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(context)
                 .setRequestListeners(listeners)
                 .build();
         Fresco.initialize(context, config);

@@ -51,11 +51,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ViewHolder viewHolder = (ViewHolder) holder;
         News news = datas.get(position);
         viewHolder.tvTitle.setText(news.getTitle());
-//        viewHolder.sdv_1.setImageURI(news.getThumbnail_pic_s());
-//        if (getItemViewType(position) == VIEW_TYPE_THREE_IMAGE){
-//            viewHolder.sdv_2.setImageURI(news.getThumbnail_pic_s02());
-//            viewHolder.sdv_3.setImageURI(news.getThumbnail_pic_s03());
-//        }
+        viewHolder.sdv_1.setImageURI(news.getThumbnail_pic_s());
+        if (getItemViewType(position) == VIEW_TYPE_THREE_IMAGE){
+            viewHolder.sdv_2.setImageURI(news.getThumbnail_pic_s02());
+            viewHolder.sdv_3.setImageURI(news.getThumbnail_pic_s03());
+        }
 
         viewHolder.tvAuthor.setText(news.getAuthor_name());
         viewHolder.tvDate.setText(news.getDate());
