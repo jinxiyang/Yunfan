@@ -9,4 +9,18 @@
     <attr name="grayStatusColor" format="color|reference"/>
     <attr name="whiteStatusColor" format="color|reference"/>
     <attr name="whiteTitleBarColor" format="color|reference"/>
+
+    <declare-styleable name="ImageTextItemView">
+        <attr name="itemText" format="string" />
+        <attr name="bottomLine" format="enum">
+            <enum name="gone" value="0" />
+            <enum name="show" value="1" />
+        </attr>
+
+        <!--设置是否有红点-->
+        <attr name="redDot" format="enum">
+            <enum name="has" value="0"/>
+            <enum name="non" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

@@ -68,6 +68,7 @@ dependencies {
     compile 'com.facebook.fresco:imagepipeline-okhttp3:1.0.0'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.7'
+    compile 'com.github.zcweng:switch-button:0.0.2@aar'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     provided 'frankiesardo:icepick-processor:3.2.0-SNAPSHOT'
