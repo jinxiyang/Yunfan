@@ -1,11 +1,9 @@
 package com.yang.yunfan.ui.main;
 
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import com.yang.yunfan.R;
 import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.ui.base.BaseFragment;
-import com.yang.yunfan.utils.MiuiUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,17 +49,5 @@ public class MeFragment extends BaseFragment {
 //            activity.getWindow().setStatusBarColor(color);
 //        }
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-
-        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO){
-            MiuiUtil.blackStatusText(getActivity().getWindow());
-        }else {
-            MiuiUtil.clearBlackStatusText(getActivity().getWindow());
-        }
     }
 }

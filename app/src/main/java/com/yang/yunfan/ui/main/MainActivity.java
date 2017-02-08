@@ -12,7 +12,6 @@ import com.roughike.bottombar.OnTabSelectListener;
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseActivity;
 import com.yang.yunfan.utils.LogUtil;
-import com.yang.yunfan.utils.ToastUtil;
 
 import java.util.List;
 

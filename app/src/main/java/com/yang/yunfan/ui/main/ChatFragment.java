@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseFragment;
-import com.yang.yunfan.utils.MiuiUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +27,6 @@ public class ChatFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate: " + MiuiUtil.isXiaomiPhone() + "      " + MiuiUtil.getMinuiRomVersion());
     }
 
     @Override
