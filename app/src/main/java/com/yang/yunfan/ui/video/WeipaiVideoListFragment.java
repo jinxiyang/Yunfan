@@ -151,17 +151,19 @@ public class WeipaiVideoListFragment extends LazyLoadFragment_2 implements OnRef
                 .subscribe(new Observer<WeipaiVideosPage>() {
                     @Override
                     public void onCompleted() {
-                        swipeToLoadLayout.setRefreshing(false);
-                        swipeToLoadLayout.setLoadingMore(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        swipeToLoadLayout.setRefreshing(false);
+                        swipeToLoadLayout.setLoadingMore(false);
                     }
 
                     @Override
                     public void onNext(WeipaiVideosPage weipaiVideosPage) {
+                        swipeToLoadLayout.setRefreshing(false);
+                        swipeToLoadLayout.setLoadingMore(false);
                         if (weipaiVideosPage != null && weipaiVideosPage.getVideos() != null && weipaiVideosPage.getVideos().size() > 0){
                             if (weipaiVideosPage.getCurrPageNo() > mPageNo){
                                 String json = new Gson().toJson(weipaiVideosPage);

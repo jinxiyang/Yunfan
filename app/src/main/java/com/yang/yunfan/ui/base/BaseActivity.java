@@ -16,6 +16,7 @@ import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.utils.LogUtil;
 
 import icepick.Icepick;
+import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -23,6 +24,8 @@ import icepick.Icepick;
  */
 public class BaseActivity extends AppCompatActivity{
     protected String TAG = this.getClass().getSimpleName();
+
+    protected CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     private ProgressDialog progressDialog;
 
@@ -36,6 +39,7 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
+        mSubscriptions.clear();
         LogUtil.i(TAG + "------" + "onStop");
     }
 

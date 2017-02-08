@@ -31,6 +31,7 @@
             android:theme="@style/WhiteStatusAppTheme" />
         <activity android:name=".ui.video.WeipaiVideoPlayActivity"
             android:configChanges="keyboard|orientation|screenSize"
+            android:theme="@style/BlackStatusAppTheme"
             />
     </application>
 
