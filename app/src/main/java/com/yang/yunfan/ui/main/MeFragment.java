@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.suke.widget.SwitchButton;
+import com.yang.yunfan.AppApplication;
 import com.yang.yunfan.R;
 import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.ui.base.BaseFragment;
@@ -43,6 +44,8 @@ public class MeFragment extends BaseFragment {
     SwitchButton sbNightTheme;
     @BindView(R.id.mgiv_system_setting)
     ImageTextItemView mgivSystemSetting;
+    @BindView(R.id.sb_save_mobile_data)
+    SwitchButton sbSaveMobileData;
 
     public MeFragment() {
         // Required empty public constructor
@@ -60,6 +63,13 @@ public class MeFragment extends BaseFragment {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 DayNightManager.switchDayNight((AppCompatActivity) getContext());
+            }
+        });
+
+        sbSaveMobileData.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                AppApplication.getInstance().setSaveMobileData(isChecked);
             }
         });
         return view;
@@ -84,5 +94,6 @@ public class MeFragment extends BaseFragment {
         super.onResume();
         int uiModeFromSp = DayNightManager.getUiModeFromSp(getContext());
         sbNightTheme.setChecked(uiModeFromSp == DayNightManager.NIGHT ? true : false);
+        sbSaveMobileData.setChecked(AppApplication.getInstance().isSaveMobileData());
     }
 }

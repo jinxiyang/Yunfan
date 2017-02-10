@@ -6,12 +6,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yang.yunfan.R;
 import com.yang.yunfan.model.News;
+import com.yang.yunfan.utils.FrescoUtil;
 
 import java.util.List;
 
@@ -20,8 +22,12 @@ import java.util.List;
  */
 
 public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int VIEW_TYPE_ONE_IMAGE = 0;
-    private static final int VIEW_TYPE_THREE_IMAGE = 1;
+
+    public static final String NETWORK_ERROR = "network_orror";
+
+    private static final int VIEW_TYPE_NETWORK_ERROR = 0;
+    private static final int VIEW_TYPE_ONE_IMAGE = 1;
+    private static final int VIEW_TYPE_THREE_IMAGE = 2;
 
     private Context context;
     private List<News> datas;
@@ -34,27 +40,49 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder vh = null;
         View view = null;
         switch (viewType){
+            case VIEW_TYPE_NETWORK_ERROR:
+                view = LayoutInflater.from(context).inflate(R.layout.layout_neterror_top, parent, false);
+                vh = new NeterrorViewHolder(view);
+                break;
             case VIEW_TYPE_ONE_IMAGE:
                 view = LayoutInflater.from(context).inflate(R.layout.item_news_list_2, parent, false);
+                vh = new ViewHolder(view);
                 break;
             case VIEW_TYPE_THREE_IMAGE:
                 view = LayoutInflater.from(context).inflate(R.layout.item_news_list, parent, false);
+                vh = new ViewHolder(view);
                 break;
         }
-        return new ViewHolder(view);
+        return vh;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        int itemViewType = getItemViewType(position);
+        if (itemViewType == VIEW_TYPE_NETWORK_ERROR){
+            NeterrorViewHolder vh = (NeterrorViewHolder) holder;
+            vh.llItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickListener != null){
+                        onItemClickListener.onClickNeterorItem(v, position);
+                    }
+                }
+            });
+            return;
+        }
+
+
         ViewHolder viewHolder = (ViewHolder) holder;
         News news = datas.get(position);
         viewHolder.tvTitle.setText(news.getTitle());
-        viewHolder.sdv_1.setImageURI(news.getThumbnail_pic_s());
-        if (getItemViewType(position) == VIEW_TYPE_THREE_IMAGE){
-            viewHolder.sdv_2.setImageURI(news.getThumbnail_pic_s02());
-            viewHolder.sdv_3.setImageURI(news.getThumbnail_pic_s03());
+        FrescoUtil.setImageUri(viewHolder.sdv_1, news.getThumbnail_pic_s());
+        if (itemViewType == VIEW_TYPE_THREE_IMAGE){
+            FrescoUtil.setImageUri(viewHolder.sdv_2, news.getThumbnail_pic_s02());
+            FrescoUtil.setImageUri(viewHolder.sdv_3, news.getThumbnail_pic_s03());
         }
 
         viewHolder.tvAuthor.setText(news.getAuthor_name());
@@ -77,6 +105,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         News news = datas.get(position);
+        if (position == 0 && news != null && NETWORK_ERROR.equals(news.getCategory())){
+            return VIEW_TYPE_NETWORK_ERROR;
+        }
+
         if (TextUtils.isEmpty(news.getThumbnail_pic_s02()) || TextUtils.isEmpty(news.getThumbnail_pic_s03())){
             return VIEW_TYPE_ONE_IMAGE;
         }else {
@@ -108,9 +140,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvDate = (TextView) itemView.findViewById(R.id.tv_date);
         }
     }
+    public static class NeterrorViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout llItem;
+
+        public NeterrorViewHolder(View itemView) {
+            super(itemView);
+            llItem = (LinearLayout) itemView.findViewById(R.id.ll_item);
+        }
+    }
 
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
+
+        void onClickNeterorItem(View v, int position);
     }
 
 }

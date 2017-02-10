@@ -129,6 +129,45 @@
           app:sb_show_indicator="false"
           app:sb_checked="false"
           />
+
+      <View
+          android:id="@+id/v_line"
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_alignParentBottom="true"
+          android:background="?attr/grayLineColor"
+          android:layout_marginLeft="25dp"/>
+   </RelativeLayout>
+
+
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="45dp"
+       android:clickable="true"
+       android:background="?attr/whiteContentBackground"
+       >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/text_size_menu_material"
+          android:textColor="?attr/blackTextColor"
+          android:layout_centerVertical="true"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="25dp"
+          android:text="@string/save_mobile_data"
+          />
+
+      <com.suke.widget.SwitchButton
+          android:id="@+id/sb_save_mobile_data"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:layout_marginRight="13dp"
+          app:sb_show_indicator="false"
+          app:sb_checked="false"
+          />
    </RelativeLayout>
 
    <View

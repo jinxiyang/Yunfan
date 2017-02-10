@@ -13,7 +13,7 @@ public class SharedPreferencesManager {
     /**
      * sp的名称
      */
-    public static final String SHARED_PREFERENCES_NAME = "renji_shared_preferences";
+    public static final String SHARED_PREFERENCES_NAME = "yunfan_shared_preferences";
 
     //上次检查版本的时间
     public static final String CHECK_VERSION_TIME = "check_version_time";

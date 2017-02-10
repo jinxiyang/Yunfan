@@ -14,12 +14,12 @@ public class LazyLoadFragment extends BaseFragment {
     /**
      * 视图是否已经生成，即onCreateView是否已经调用
      */
-    private boolean isViewCreated = false;
+    protected boolean isViewCreated = false;
 
     /**
      * 是否已经加载数据了
      */
-    private boolean isLoad = false;
+    protected boolean isLoad = false;
 
 
     @Override

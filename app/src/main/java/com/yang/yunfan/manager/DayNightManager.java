@@ -3,6 +3,7 @@ package com.yang.yunfan.manager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 
@@ -47,6 +48,9 @@ public class DayNightManager {
      * 切换主题,并保存UiMode到SharedPreferences
      */
     public static void switchDayNight(AppCompatActivity activity) {
+        if (activity == null){
+            return;
+        }
         int currentNightMode = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         int nextMode = currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
         saveUiModeFromSp(activity, nextMode);

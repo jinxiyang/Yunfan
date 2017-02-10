@@ -3,6 +3,8 @@ package com.yang.yunfan.http;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.yang.yunfan.BuildConfig;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -75,6 +77,7 @@ public class AppHttpClient {
                 builder.addInterceptor(interceptor);
                 builder.addNetworkInterceptor(new StethoInterceptor());//配合chrome监听网络请求
             }
+            builder.connectTimeout(15000, TimeUnit.SECONDS);
             okHttpClient = builder.build();
         }
         return okHttpClient;

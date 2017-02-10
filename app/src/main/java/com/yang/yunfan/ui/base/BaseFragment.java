@@ -18,6 +18,7 @@ import com.yang.yunfan.R;
 import com.yang.yunfan.utils.LogUtil;
 
 import icepick.Icepick;
+import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -26,6 +27,8 @@ import icepick.Icepick;
 public class BaseFragment extends Fragment {
     protected String TAG = this.getClass().getSimpleName();
     private ProgressDialog progressDialog;
+
+    protected CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     @Override
     public void onAttach(Context context) {
@@ -63,6 +66,13 @@ public class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         LogUtil.i(TAG + "------" + "onStart");
+    }
+
+    @Override
+    public void onStop() {
+        mSubscriptions.clear();
+        super.onStop();
+        LogUtil.i(TAG + "------" + "onStop");
     }
 
     @Override

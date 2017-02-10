@@ -1,12 +1,16 @@
 package com.yang.yunfan.utils;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
+import com.yang.yunfan.AppApplication;
 import com.yang.yunfan.BuildConfig;
 
 import java.util.HashSet;
@@ -37,5 +41,29 @@ public class FrescoUtil {
                 .setRequestListeners(listeners)
                 .build();
         Fresco.initialize(context, config);
+    }
+
+
+    /**
+     * 为SimpleDraweeView设置图片
+     * @param sdv
+     * @param uri
+     */
+    public static void setImageUri(SimpleDraweeView sdv, Uri uri){
+        if (AppApplication.getInstance().isSaveMobileData()){
+            ImagePipeline pipeline = Fresco.getImagePipeline();
+            if (pipeline.isInBitmapMemoryCache(uri) || pipeline.isInDiskCacheSync(uri)){
+                sdv.setImageURI(uri);
+                return;
+            }
+        }else {
+            sdv.setImageURI(uri);
+        }
+    }
+    /**
+     * 为SimpleDraweeView设置图片
+     */
+    public static void setImageUri(SimpleDraweeView sdv, String url){
+        setImageUri(sdv, Uri.parse(url));
     }
 }

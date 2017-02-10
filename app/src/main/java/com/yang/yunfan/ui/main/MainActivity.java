@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements OnTabSelectListener, O
         List<Fragment> fragments = fm.getFragments();
         if (fragments != null) {
             for (Fragment f : fragments) {
-                if (f != fragment && f.isVisible() && !f.isHidden()) {
+                if (f != fragment) {
                     ft.hide(f);
                 }
             }
