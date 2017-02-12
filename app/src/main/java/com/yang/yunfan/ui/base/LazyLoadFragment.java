@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import icepick.State;
+
 /**
  * 此fragment配合viewpager使用，切换tab页面时懒加载数据
  * Created by yang on 2017/1/7.
@@ -19,7 +21,15 @@ public class LazyLoadFragment extends BaseFragment {
     /**
      * 是否已经加载数据了
      */
-    protected boolean isLoad = false;
+    @State
+    boolean isLoad = false;
+
+    /**
+     * 表示是否重新展示过
+     *
+     * 当activity因主题切换而recreate时，fragment 从栈中恢复出来，这是就不要重新懒加载数据，直接重新展示恢复的数据
+     */
+    private boolean isReshow = false;
 
 
     @Override
@@ -30,13 +40,21 @@ public class LazyLoadFragment extends BaseFragment {
     }
 
     private void attemptLoad() {
-        if (!isViewCreated || isLoad){
+        if (!isViewCreated){
             return;
         }
-
         if (getUserVisibleHint()){
-            lazyLoad();
-            isLoad = true;
+            if (isLoad){
+                if (!isReshow){
+                    reshowWhenRestoreData();
+                    isReshow = true;
+                }
+            }else {
+                lazyLoad();
+                isLoad = true;
+                //避免不是恢复数据时的重新展示
+                isReshow = true;
+            }
         }
     }
 
@@ -49,9 +67,15 @@ public class LazyLoadFragment extends BaseFragment {
     }
 
     /**
+     *fragment从栈中恢复出来,直接重新展示恢复的数据
+     */
+    public void reshowWhenRestoreData(){
+
+    }
+
+    /**
      * 懒加载数据，子类重写此方法
      */
     public void lazyLoad(){
-
     }
 }

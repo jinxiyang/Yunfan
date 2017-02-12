@@ -3,7 +3,6 @@ package com.yang.yunfan.ui.news;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +23,7 @@ import com.yang.yunfan.model.ResultJH;
 import com.yang.yunfan.source.ToutiaoNewsRemoteDataSourceImpl;
 import com.yang.yunfan.ui.base.LazyLoadFragment;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +53,8 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
     @BindView(R.id.ll_neterror)
     LinearLayout llNeterror;
 
-    private ArrayList<News> datas;
+    @State
+    ArrayList<News> datas;
 
     private NewsListAdapter adapter;
 
@@ -79,7 +80,10 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
         if (bundle != null) {
             mNewsType = bundle.getString(NEWS_TYPE);
         }
-        datas = new ArrayList<>();
+        //datas可能是恢复的数据
+        if (datas == null){
+            datas = new ArrayList<>();
+        }
         newsDao = AppApplication.getInstance().getDaoSession().getNewsDao();
     }
 
@@ -88,12 +92,7 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_tab, container, false);
         ButterKnife.bind(this, view);
-        return view;
-    }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new NewsListAdapter(getContext(), datas);
@@ -116,6 +115,7 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
         recyclerView.setAdapter(adapter);
         swipeToLoadLayout.setOnRefreshListener(this);
         swipeToLoadLayout.setLoadMoreEnabled(false);
+        return view;
     }
 
     @Override
@@ -145,7 +145,7 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
                         e.printStackTrace();
                         Log.i(TAG, "getNewsListByHttp onError: ");
                         swipeToLoadLayout.setRefreshing(false);
-//                        if (!AppApplication.getInstance().getNetworkState().connected){
+                        if (e instanceof UnknownHostException || !AppApplication.getInstance().getNetworkState().connected){
                             if (datas.isEmpty()){
                                 swipeToLoadLayout.setRefreshEnabled(false);
                                 llNeterror.setVisibility(View.VISIBLE);
@@ -155,7 +155,7 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
                                 datas.add(0, news);
                                 adapter.notifyDataSetChanged();
                             }
-//                        }
+                        }
                     }
 
                     @Override
@@ -168,43 +168,12 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
                         datas.addAll(newsList);
                         adapter.notifyDataSetChanged();
                         swipeToLoadLayout.setRefreshing(false);
-//                        saveNewsListIntoDb(newsList);
                     }
                 });
         mSubscriptions.add(subscription);
     }
 
-    private void saveNewsListIntoDb(List<News> list) {
-        List<News> newsList = newsDao.queryBuilder().where(NewsDao.Properties.Category.eq(mNewsType)).list();
-        newsDao.deleteInTx(newsList);
-        newsDao.saveInTx(list);
-    }
 
-    private void getNewsListFromDb() {
-        newsDao.queryBuilder().where(NewsDao.Properties.Category.eq(mNewsType)).orderDesc(NewsDao.Properties.Date).rx().list()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<News>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        swipeToLoadLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onNext(List<News> list) {
-                        datas.clear();
-                        datas.addAll(list);
-                        adapter.notifyDataSetChanged();
-                        swipeToLoadLayout.setRefreshing(false);
-                    }
-                });
-    }
 
     @OnClick(R.id.btn_retry)
     public void onClick() {
@@ -212,4 +181,26 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
         swipeToLoadLayout.setRefreshing(true);
     }
 
+    @Override
+    public void reshowWhenRestoreData() {
+        super.reshowWhenRestoreData();
+        if (AppApplication.getInstance().getNetworkState().connected){
+            if (datas.isEmpty()){
+                lazyLoad();
+            }else if (NewsListAdapter.NETWORK_ERROR.equals(datas.get(0).getCategory())){
+                datas.remove(0);
+                adapter.notifyDataSetChanged();
+            }
+        }else {
+            if (datas.isEmpty()){
+                swipeToLoadLayout.setRefreshEnabled(false);
+                llNeterror.setVisibility(View.VISIBLE);
+            }else if (!NewsListAdapter.NETWORK_ERROR.equals(datas.get(0).getCategory())){
+                News news = new News();
+                news.setCategory(NewsListAdapter.NETWORK_ERROR);
+                datas.add(0, news);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

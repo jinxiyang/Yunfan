@@ -1,8 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="?attr/grayContentBackground"
     tools:context="com.yang.yunfan.ui.main.ChatFragment">
 
@@ -10,10 +9,30 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_bar_height"
+        android:layout_alignParentTop="true"
         android:background="?attr/grayStatusColor"/>
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_below="@id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="切换"
+        android:textColor="?attr/blackTextColor"
+        android:layout_centerInParent="true"
+        />
+
+    <View
+        android:id="@+id/night_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

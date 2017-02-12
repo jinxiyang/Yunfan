@@ -33,10 +33,17 @@ public class MainActivity extends BaseActivity implements OnTabSelectListener, O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         bottomBar.setOnTabSelectListener(this);
         bottomBar.setOnTabReselectListener(this);
 
+        int i = 0;
+        if (savedInstanceState != null){
+            i++;
+            i = i + 2;
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            i = i + 1;
+            i = i -1;
+        }
         if (currIndex == -1) {
             currIndex = R.id.tab_news;//默认显示第一个
         }
