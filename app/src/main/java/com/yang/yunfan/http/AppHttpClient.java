@@ -19,6 +19,7 @@ public class AppHttpClient {
     private static AppHttpClient mInstance;
 
     private Retrofit retrofit;
+    private Retrofit juheRetrofit;
 
     private OkHttpClient okHttpClient;
 
@@ -61,6 +62,22 @@ public class AppHttpClient {
                     .build();
         }
         return retrofit;
+    }
+
+    /**
+     * 获取pgyer retrofit
+     * @return
+     */
+    public Retrofit juheRetrofit(String baseUrl){
+        if (juheRetrofit == null){
+            juheRetrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .client(getOkHttpClient())
+                    .build();
+        }
+        return juheRetrofit;
     }
 
 

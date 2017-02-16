@@ -1,7 +1,9 @@
 package com.yang.yunfan.ui.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseActivity;
 import com.yang.yunfan.utils.ToastUtil;
@@ -34,6 +40,23 @@ public class NewsDetailActivity extends BaseActivity {
     ProgressBar progressBar;
 
     private String mUrl;
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA share_media) {
+            Log.i(TAG, "onResult: ");
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+            Log.i(TAG, "onError: ");
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media) {
+            Log.i(TAG, "onCancel: ");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +150,26 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_share){
-            ToastUtil.showShort(mUrl);
+            new ShareAction(this)
+                    .withTitle(getString(R.string.app_name))
+                    .withTargetUrl(mUrl)
+                    .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
+                    .setCallback(umShareListener)
+                    .open();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
     }
 }

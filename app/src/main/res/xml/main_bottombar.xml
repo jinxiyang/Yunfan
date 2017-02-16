@@ -9,9 +9,13 @@
         icon="@drawable/navigation_video"
         title="@string/video"/>
     <tab
-        id="@+id/tab_chat"
-        icon="@drawable/navigation_chat"
-        title="@string/chat"/>
+        id="@+id/tab_joke"
+        icon="@drawable/navigation_joke"
+        title="@string/joke"/>
+    <!--<tab-->
+        <!--id="@+id/tab_chat"-->
+        <!--icon="@drawable/navigation_chat"-->
+        <!--title="@string/chat"/>-->
     <tab
         id="@+id/tab_me"
         icon="@drawable/navigation_me"

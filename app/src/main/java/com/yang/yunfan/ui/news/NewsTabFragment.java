@@ -20,7 +20,7 @@ import com.yang.yunfan.model.News;
 import com.yang.yunfan.model.NewsDao;
 import com.yang.yunfan.model.ResponeJH;
 import com.yang.yunfan.model.ResultJH;
-import com.yang.yunfan.source.ToutiaoNewsRemoteDataSourceImpl;
+import com.yang.yunfan.source.RemoteDataSourceImpl;
 import com.yang.yunfan.ui.base.LazyLoadFragment;
 
 import java.net.UnknownHostException;
@@ -131,7 +131,7 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
     }
 
     private void getNewsListByHttp() {
-        Subscription subscription = ToutiaoNewsRemoteDataSourceImpl.getInstance().getNewsListByType(mNewsType)
+        Subscription subscription = RemoteDataSourceImpl.getInstance().getNewsListByType(mNewsType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponeJH<ResultJH<News>>>() {

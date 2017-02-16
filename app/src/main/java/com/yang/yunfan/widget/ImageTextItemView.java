@@ -37,6 +37,8 @@ public class ImageTextItemView extends RelativeLayout {
 
     private ImageView ivDot;
 
+    public View container;
+
     public ImageTextItemView(Context context) {
         this(context, null);
     }
@@ -57,6 +59,8 @@ public class ImageTextItemView extends RelativeLayout {
         ivDot = (ImageView) findViewById(R.id.iv_dot);
         View line = findViewById(R.id.v_line);
 
+        container = findViewById(R.id.container);
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImageTextItemView);
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++){
@@ -73,6 +77,7 @@ public class ImageTextItemView extends RelativeLayout {
             }
         }
         a.recycle();
+        setClickable(true);
     }
 
     /**

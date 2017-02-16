@@ -3,13 +3,12 @@
     package="com.yang.yunfan">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--允许读取网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--允许读取wifi网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 允许读取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许读取wifi网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppApplication"
@@ -20,9 +19,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/TransparentTheme"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/TransparentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,10 +33,42 @@
         <activity
             android:name=".ui.news.NewsDetailActivity"
             android:theme="@style/WhiteStatusAppTheme" />
-        <activity android:name=".ui.video.WeipaiVideoPlayActivity"
+        <activity
+            android:name=".ui.video.WeipaiVideoPlayActivity"
             android:configChanges="keyboard|orientation|screenSize"
-            android:theme="@style/BlackStatusAppTheme"
+            android:theme="@style/BlackStatusAppTheme" />
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58a13fdb1c5dd0491c000c69"></meta-data>
+
+        <!--QQ分享开始-->
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105944596" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--QQ分享结束-->
+
+        <activity android:name=".ui.setting.SettingActivity"
+            android:theme="@style/WhiteStatusAppTheme"
+            android:screenOrientation="portrait"
             />
+
     </application>
 
 </manifest>

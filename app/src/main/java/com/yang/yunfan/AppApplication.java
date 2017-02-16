@@ -3,12 +3,17 @@ package com.yang.yunfan;
 import android.content.IntentFilter;
 
 import com.facebook.stetho.Stetho;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 import com.yang.yunfan.http.network.NetworkConnectChangedReceiver;
 import com.yang.yunfan.http.network.NetworkState;
 import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.manager.SaveMobileDataManager;
+import com.yang.yunfan.manager.UserInfoManager;
 import com.yang.yunfan.model.DaoMaster;
 import com.yang.yunfan.model.DaoSession;
+import com.yang.yunfan.model.UserInfo;
 import com.yang.yunfan.ui.base.BaseApplication;
 import com.yang.yunfan.utils.FrescoUtil;
 
@@ -34,6 +39,11 @@ public class AppApplication extends BaseApplication {
 
     //是否是省流量模式
     private boolean saveMobileData = false;
+
+    /**
+     * 用户信息
+     */
+    private UserInfo mUserInfo;
 
     @Override
     public void onCreate() {
@@ -61,6 +71,16 @@ public class AppApplication extends BaseApplication {
         FrescoUtil.init(getApplicationContext());
 
 
+
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+        Config.DEBUG = BuildConfig.DEBUG;
+        UMShareAPI.get(this);
+
+        mUserInfo = UserInfoManager.getUserInfo();
+    }
+
+    {
+        PlatformConfig.setQQZone("1105944596", "VnVllD2YSr1Wyerc");
     }
 
     private void initNetworkState() {
@@ -98,5 +118,13 @@ public class AppApplication extends BaseApplication {
 
     public DaoSession getDaoSession() {
         return daoSession;
+    }
+
+    public UserInfo getUserInfo() {
+        return mUserInfo;
+    }
+
+    public void setUserInfo(UserInfo mUserInfo) {
+        this.mUserInfo = mUserInfo;
     }
 }

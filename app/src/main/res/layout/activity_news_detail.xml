@@ -46,12 +46,6 @@
         android:progressDrawable="@drawable/horizontal_progress_layer"
         android:secondaryProgress="0" />
 
-    <View
-        android:id="@+id/night_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        />
 
 </RelativeLayout>
 

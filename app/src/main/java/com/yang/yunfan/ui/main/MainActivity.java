@@ -1,5 +1,6 @@
 package com.yang.yunfan.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.umeng.socialize.UMShareAPI;
 import com.yang.yunfan.R;
 import com.yang.yunfan.ui.base.BaseActivity;
 import com.yang.yunfan.utils.LogUtil;
@@ -80,9 +82,12 @@ public class MainActivity extends BaseActivity implements OnTabSelectListener, O
             case R.id.tab_video:
                 fragment = new VideoFragment();
                 break;
-            case R.id.tab_chat:
-                fragment = new ChatFragment();
+            case R.id.tab_joke:
+                fragment = new JokeFragment();
                 break;
+//            case R.id.tab_chat:
+//                fragment = new ChatFragment();
+//                break;
             case R.id.tab_me:
                 fragment = new MeFragment();
                 break;
@@ -100,5 +105,24 @@ public class MainActivity extends BaseActivity implements OnTabSelectListener, O
     public void onTabSelected(@IdRes int tabId) {
         LogUtil.i(tabId + "onTabSelected");
         showFragment(tabId);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        UMShareAPI.get(this).onSaveInstanceState(outState);
     }
 }

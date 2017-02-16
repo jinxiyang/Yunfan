@@ -13,43 +13,48 @@
        android:layout_height="@dimen/status_bar_height"
        android:background="#199475"/>
 
-   <android.support.v7.widget.Toolbar
-       android:id="@+id/tool_bar"
-       android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize"
-       android:layout_alignParentTop="true"
-       android:background="#199475"
-       app:popupTheme="@style/AppTheme.PopupOverlay"
-       app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-       app:title=""
-       >
+   <!--<android.support.v7.widget.Toolbar-->
+       <!--android:id="@+id/tool_bar"-->
+       <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="?attr/actionBarSize"-->
+       <!--android:layout_alignParentTop="true"-->
+       <!--android:background="#199475"-->
+       <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+       <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+       <!--app:title=""-->
+       <!--&gt;-->
 
-      <TextView
-          android:id="@+id/tv_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:textColor="?attr/whiteTextColor"
-          android:textSize="@dimen/text_size_menu_material"
-          />
+      <!--<TextView-->
+          <!--android:id="@+id/tv_title"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_gravity="center"-->
+          <!--android:textColor="?attr/whiteTextColor"-->
+          <!--android:textSize="@dimen/text_size_menu_material"-->
+          <!--/>-->
 
-   </android.support.v7.widget.Toolbar>
+   <!--</android.support.v7.widget.Toolbar>-->
 
    <RelativeLayout
        android:id="@+id/rl_person_layout"
        android:layout_width="match_parent"
-       android:layout_height="100dp"
+       android:layout_height="wrap_content"
        android:background="#199475"
        android:clickable="true"
+       android:paddingTop="30dp"
+       android:paddingBottom="30dp"
        >
 
-      <ImageView
-          android:id="@+id/iv_person"
-          android:layout_width="wrap_content"
+      <com.facebook.drawee.view.SimpleDraweeView
+          android:id="@+id/sdv_user_icon"
+          android:layout_width="80dp"
           android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
-          android:layout_marginLeft="30dp"
-          android:src="@drawable/person"
+          android:layout_centerHorizontal="true"
+          app:viewAspectRatio="1"
+          app:backgroundImage="?attr/whiteContentBackground"
+          app:placeholderImage="@drawable/umeng_socialize_qq"
+          app:roundAsCircle="true"
+          app:fadeDuration="0"
           />
 
 
@@ -58,25 +63,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
-          android:layout_toRightOf="@id/iv_person"
-          android:layout_marginLeft="30dp"
+          android:layout_below="@id/sdv_user_icon"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="10dp"
           android:src="@drawable/person"
           android:textColor="?attr/whiteTextColor"
           android:textSize="@dimen/text_size_medium_material"
           android:text="@string/un_login"
           />
-
-
-      <ImageView
-          android:layout_width="20dp"
-          android:layout_height="20dp"
-          android:layout_centerVertical="true"
-          android:layout_marginRight="30dp"
-          android:scaleType="fitXY"
-          android:src="@drawable/right_arrow_white"
-          android:layout_alignParentRight="true"
-          />
-
    </RelativeLayout>
 
 
@@ -190,6 +184,7 @@
        android:id="@+id/mgiv_system_setting"
        android:layout_width="match_parent"
        android:layout_height="45dp"
+       android:clickable="true"
        app:itemText="@string/system_setting"
        app:bottomLine="gone"
        />
