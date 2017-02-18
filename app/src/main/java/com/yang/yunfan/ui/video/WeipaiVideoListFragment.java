@@ -1,13 +1,15 @@
 package com.yang.yunfan.ui.video;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +18,23 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.google.gson.Gson;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
 import com.yang.yunfan.R;
 import com.yang.yunfan.source.jsoup.WeipaiJsoup;
 import com.yang.yunfan.source.jsoup.WeipaiVideo;
 import com.yang.yunfan.source.jsoup.WeipaiVideosPage;
 import com.yang.yunfan.ui.base.LazyLoadFragment_2;
 import com.yang.yunfan.utils.LogUtil;
-import com.yang.yunfan.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -113,8 +116,44 @@ public class WeipaiVideoListFragment extends LazyLoadFragment_2 implements OnRef
      * 分享视频
      * @param weipaiVideo
      */
-    private void shareVideo(WeipaiVideo weipaiVideo) {
-        ToastUtil.showShort("视频分享 正在开发");
+    private void shareVideo(final WeipaiVideo weipaiVideo) {
+        showProgressDialog();
+
+        Subscription subscription = WeipaiJsoup.getWeipaiVideoUrl(weipaiVideo.getVideoHtmlUrl())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideProgressDialog();
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        hideProgressDialog();
+                        UMVideo umVideo = new UMVideo(s);
+                        String title = weipaiVideo.getTitle();
+                        if (TextUtils.isEmpty(title)){
+                            title = getString(R.string.app_name);
+                        }
+                        umVideo.setTitle(title);
+                        UMImage umImage = new UMImage(getContext(), weipaiVideo.getImageUrl());
+                        umVideo.setThumb(umImage);
+                        umVideo.setH5Url(weipaiVideo.getVideoHtmlUrl());
+                        new ShareAction((AppCompatActivity) getContext())
+                                .withTitle(title)
+                                .withMedia(umVideo)
+                                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
+                                .open();
+                    }
+                });
+        mSubscriptions.add(subscription);
     }
 
     /**
@@ -122,8 +161,8 @@ public class WeipaiVideoListFragment extends LazyLoadFragment_2 implements OnRef
      * @param weipaiVideo
      */
     private void showPlayVideo(WeipaiVideo weipaiVideo) {
-        Intent intent = new Intent(getContext(), WeipaiVideoPlayActivity.class);
-        intent.putExtra(WeipaiVideoPlayActivity.WEIPAI_VIDEO, weipaiVideo);
+        Intent intent = new Intent(getContext(), WeipaiVideoActivity.class);
+        intent.putExtra(WeipaiVideoActivity.WEIPAI_VIDEO, weipaiVideo);
         startActivity(intent);
     }
 
@@ -165,13 +204,14 @@ public class WeipaiVideoListFragment extends LazyLoadFragment_2 implements OnRef
                         swipeToLoadLayout.setRefreshing(false);
                         swipeToLoadLayout.setLoadingMore(false);
                         if (weipaiVideosPage != null && weipaiVideosPage.getVideos() != null && weipaiVideosPage.getVideos().size() > 0){
+                            List<WeipaiVideo> videos = weipaiVideosPage.getVideos();
                             if (weipaiVideosPage.getCurrPageNo() > mPageNo){
                                 String json = new Gson().toJson(weipaiVideosPage);
                                 LogUtil.i(json);
-                                datas.addAll(weipaiVideosPage.getVideos());
+                                datas.addAll(videos);
                             }else {
                                 datas.clear();
-                                datas.addAll(weipaiVideosPage.getVideos());
+                                datas.addAll(videos);
                             }
                             mPageNo = weipaiVideosPage.getCurrPageNo();
                             adapter.notifyDataSetChanged();

@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             app:placeholderImage="@drawable/placeholder"
             app:placeholderImageScaleType="centerCrop"
-            app:actualImageScaleType="centerCrop"
+            app:actualImageScaleType="focusCrop"
             app:fadeDuration="0"
             />
 

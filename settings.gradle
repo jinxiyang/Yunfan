@@ -1,1 +1,1 @@
-include ':app', ':library_SwipeToLoadLayout'
+include ':app', ':library_SwipeToLoadLayout', ':gsyVideoPlayer'

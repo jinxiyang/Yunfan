@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Yunfan.iml" filepath="$PROJECT_DIR$/Yunfan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" filepath="$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_SwipeToLoadLayout/library_SwipeToLoadLayout.iml" filepath="$PROJECT_DIR$/library_SwipeToLoadLayout/library_SwipeToLoadLayout.iml" />
     </modules>
   </component>

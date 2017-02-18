@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class WeipaiVideo implements Parcelable{
     private String videoHtmlUrl;
+    private String videoUrl;
     private String title;
     private String imageUrl;
     private String userIconUrl;
@@ -13,6 +14,7 @@ public class WeipaiVideo implements Parcelable{
 
     protected WeipaiVideo(Parcel in) {
         videoHtmlUrl = in.readString();
+        videoUrl = in.readString();
         title = in.readString();
         imageUrl = in.readString();
         userIconUrl = in.readString();
@@ -22,6 +24,7 @@ public class WeipaiVideo implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(videoHtmlUrl);
+        dest.writeString(videoUrl);
         dest.writeString(title);
         dest.writeString(imageUrl);
         dest.writeString(userIconUrl);
@@ -83,6 +86,14 @@ public class WeipaiVideo implements Parcelable{
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public WeipaiVideo() {

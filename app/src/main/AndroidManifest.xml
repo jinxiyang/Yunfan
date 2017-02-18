@@ -38,12 +38,11 @@
             android:configChanges="keyboard|orientation|screenSize"
             android:theme="@style/BlackStatusAppTheme" />
 
-
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="58a13fdb1c5dd0491c000c69"></meta-data>
+            android:value="58a13fdb1c5dd0491c000c69" />
 
-        <!--QQ分享开始-->
+        <!-- QQ分享开始 -->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
@@ -62,13 +61,16 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--QQ分享结束-->
+        <!-- QQ分享结束 -->
 
-        <activity android:name=".ui.setting.SettingActivity"
-            android:theme="@style/WhiteStatusAppTheme"
+        <activity
+            android:name=".ui.setting.SettingActivity"
             android:screenOrientation="portrait"
-            />
-
+            android:theme="@style/WhiteStatusAppTheme" />
+        <activity android:name=".ui.video.WeipaiVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackStatusAppTheme"/>
     </application>
 
 </manifest>
