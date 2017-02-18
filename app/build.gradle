@@ -40,30 +40,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        debug {
-            //是否启动混淆
-            minifyEnabled true
-            //是否启动zipAlign
-            zipAlignEnabled false
-            //是否移除无用的resource文件
-            shrinkResources false
-            //是否支持多个dex,当方法数大于65535即64k时需要设置
-            multiDexEnabled true
-
-            signingConfig signingConfigs.debug
-            //指定混淆文件
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
-    signingConfigs {
-        debug {
-            storeFile file('PrivateKey.jks')
-            storePassword "Yjx201507"
-            keyAlias "yang"
-            keyPassword "Yjx201507"
-        }
-    }
 //    externalNativeBuild {
 //        cmake {
 //            path "CMakeLists.txt"
