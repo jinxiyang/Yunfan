@@ -27,7 +27,7 @@ android {
     buildTypes {
         release {
             //是否启动混淆
-            minifyEnabled true
+            minifyEnabled false
             //是否启动zipAlign
             zipAlignEnabled false
             //是否移除无用的resource文件
@@ -51,6 +51,21 @@ android {
 //            path "CMakeLists.txt"
 //        }
 //    }
+
+
+
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def newName
+            def oldFile = output.outputFile
+            def outDirectory = oldFile.parent
+            newName = "yunfan.apk"
+
+            output.outputFile = new File(outDirectory, newName)
+
+        }
+    }
 }
 
 dependencies {
