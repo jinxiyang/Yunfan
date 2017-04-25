@@ -1,22 +1,48 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
+
+//获取时间戳
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
+
+
+def verCode = 4
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
+
+    signingConfigs {
+        signingConfig {
+            keyAlias 'android'
+            keyPassword 'android'
+            storeFile file('android.jks')
+            storePassword 'android'
+        }
+    }
+
     defaultConfig {
         applicationId "com.yang.yunfan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "0.1.3"
+        versionCode verCode
+        versionName APP_VERSION
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        externalNativeBuild {
 //            cmake {
 //                cppFlags "-frtti -fexceptions"
 //            }
 //        }
+
+        signingConfig signingConfigs.signingConfig
     }
+
+
+
 
     sourceSets {
         main {
@@ -27,15 +53,31 @@ android {
     buildTypes {
         release {
             //是否启动混淆
-            minifyEnabled false
+            minifyEnabled true
             //是否启动zipAlign
-            zipAlignEnabled false
+            zipAlignEnabled true
             //是否移除无用的resource文件
-            shrinkResources false
+            shrinkResources true
             //是否支持多个dex,当方法数大于65535即64k时需要设置
             multiDexEnabled true
 
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.signingConfig
+            //指定混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+
+        develop {
+            //是否启动混淆
+            minifyEnabled true
+            //是否启动zipAlign
+            zipAlignEnabled true
+            //是否移除无用的resource文件
+            shrinkResources true
+            //是否支持多个dex,当方法数大于65535即64k时需要设置
+            multiDexEnabled true
+
+            signingConfig signingConfigs.signingConfig
             //指定混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -53,16 +95,46 @@ android {
 //    }
 
 
+    //渠道Flavors
+    productFlavors {
+        huaweimarket {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huaweimarket"]
+        }
+
+        huaweimarket {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huaweimarket"]
+        }
+
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+    }
+
+
 
     //修改生成的apk名字
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def newName
+            def timeNow
             def oldFile = output.outputFile
             def outDirectory = oldFile.parent
-            newName = "yunfan.apk"
 
-            output.outputFile = new File(outDirectory, newName)
+            if ("true".equals(IS_JENKINS)) {
+                timeNow = JENKINS_TIME
+//                outDirectory = 'G:/Tomcat/webapps/jenkins/apk'
+                newName = 'yufan-android-v' + APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
+            } else {
+                timeNow = getDate()
+                if (variant.buildType.name.equals('debug')) {
+                    newName = "yufan-android-v${APP_VERSION}-debug.apk"
+                } else {
+                    newName = 'yunfan-android-v' + APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
+                }
+            }
+
+            output.outputFile = new File(newName)
+//            output.outputFile = new File(outDirectory, newName)
 
         }
     }
