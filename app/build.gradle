@@ -120,7 +120,8 @@ android {
             if ("true".equals(IS_JENKINS)) {
                 timeNow = JENKINS_TIME
 //                outDirectory = 'G:/Tomcat/webapps/jenkins/apk'
-                newName = "yufan-android-v${APP_VERSION}-" + variant.productFlavors[0].name + "${getDate()}jekins-" + variant.buildType.name + '.apk'
+                newName = "yufan-android.apk"
+//                newName = "yufan-android-v${APP_VERSION}-" + variant.productFlavors[0].name + "${getDate()}jekins-" + variant.buildType.name + '.apk'
             } else {
                 timeNow = getDate()
                 if (variant.buildType.name.equals('debug')) {
