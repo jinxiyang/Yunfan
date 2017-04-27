@@ -97,16 +97,13 @@ android {
 
     //渠道Flavors
     productFlavors {
-        huaweimarket {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huaweimarket"]
-        }
 
         huaweimarket {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huaweimarket"]
+            manifestPlaceholders.put("CHANNEL_VALUE", "huaweimarket")
         }
 
         xiaomi {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+            manifestPlaceholders.put("CHANNEL_VALUE", "xiaomi")
         }
     }
 
@@ -123,7 +120,7 @@ android {
             if ("true".equals(IS_JENKINS)) {
                 timeNow = JENKINS_TIME
 //                outDirectory = 'G:/Tomcat/webapps/jenkins/apk'
-                newName = 'yufan-android-v' + APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
+                newName = "yufan-android-v${APP_VERSION}-" + variant.productFlavors[0].name + "${getDate()}jekins-" + variant.buildType.name + '.apk'
             } else {
                 timeNow = getDate()
                 if (variant.buildType.name.equals('debug')) {
