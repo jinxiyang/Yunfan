@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class NewsFragment extends BaseFragment {
 
     @OnClick(R.id.iv_add_channel)
     public void onClick() {
-        Context context = getContext();
-        context.startActivity(new Intent(getContext(), EditNewsChannelActivity.class));
+        AppCompatActivity ac = (AppCompatActivity) getContext();
+        ac.startActivity(new Intent(getContext(), EditNewsChannelActivity.class));
     }
 }
