@@ -2,19 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 
-//获取时间戳
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMddHHmm')
-    return formattedDate
-}
-
-
-def verCode = 4
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '26.0.2'
 
     signingConfigs {
         signingConfig {
@@ -29,16 +20,9 @@ android {
         applicationId "com.yang.yunfan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode verCode
-        versionName APP_VERSION
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-//        externalNativeBuild {
-//            cmake {
-//                cppFlags "-frtti -fexceptions"
-//            }
-//        }
-
-        signingConfig signingConfigs.signingConfig
     }
 
 
@@ -64,77 +48,32 @@ android {
             signingConfig signingConfigs.signingConfig
             //指定混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders.put("CHANNEL_VALUE", "release")
         }
 
 
-        develop {
+        debug {
             //是否启动混淆
-            minifyEnabled true
+            minifyEnabled false
             //是否启动zipAlign
-            zipAlignEnabled true
+            zipAlignEnabled false
             //是否移除无用的resource文件
-            shrinkResources true
+            shrinkResources false
             //是否支持多个dex,当方法数大于65535即64k时需要设置
-            multiDexEnabled true
+            multiDexEnabled false
 
             signingConfig signingConfigs.signingConfig
             //指定混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders.put("CHANNEL_VALUE", "debug")
         }
 
     }
 
     lintOptions {
         abortOnError false
-    }
-
-//    externalNativeBuild {
-//        cmake {
-//            path "CMakeLists.txt"
-//        }
-//    }
-
-
-    //渠道Flavors
-    productFlavors {
-
-        huaweimarket {
-            manifestPlaceholders.put("CHANNEL_VALUE", "huaweimarket")
-        }
-
-        xiaomi {
-            manifestPlaceholders.put("CHANNEL_VALUE", "xiaomi")
-        }
-    }
-
-
-
-    //修改生成的apk名字
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def newName
-            def timeNow
-            def oldFile = output.outputFile
-            def outDirectory = oldFile.parent
-
-            if ("true".equals(IS_JENKINS)) {
-                timeNow = JENKINS_TIME
-//                outDirectory = 'G:/Tomcat/webapps/jenkins/apk'
-                newName = "yufan-android.apk"
-//                newName = "yufan-android-v${APP_VERSION}-" + variant.productFlavors[0].name + "${getDate()}jekins-" + variant.buildType.name + '.apk'
-            } else {
-                timeNow = getDate()
-                if (variant.buildType.name.equals('debug')) {
-                    newName = "yufan-android-v${APP_VERSION}-debug.apk"
-                } else {
-                    newName = 'yunfan-android-v' + APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
-                }
-            }
-
-            output.outputFile = new File(newName)
-//            output.outputFile = new File(outDirectory, newName)
-
-        }
     }
 }
 
@@ -150,7 +89,6 @@ dependencies {
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.jakewharton:butterknife:8.4.0'
-    compile 'frankiesardo:icepick:3.2.0-SNAPSHOT'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -169,5 +107,4 @@ dependencies {
     compile 'net.zetetic:android-database-sqlcipher:3.5.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    provided 'frankiesardo:icepick-processor:3.2.0-SNAPSHOT'
 }

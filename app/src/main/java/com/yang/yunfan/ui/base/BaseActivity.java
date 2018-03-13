@@ -3,19 +3,15 @@ package com.yang.yunfan.ui.base;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import com.yang.yunfan.R;
-import com.yang.yunfan.manager.DayNightManager;
 import com.yang.yunfan.utils.LogUtil;
 
-import icepick.Icepick;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -32,7 +28,6 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
         LogUtil.i(TAG + "------" + "onCreate");
     }
 
@@ -86,7 +81,6 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
         LogUtil.i(TAG + "------" + "onSaveInstanceState");
     }
 

@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import icepick.State;
-
 /**
  * 此fragment配合viewpager使用，切换tab页面时懒加载数据
  * Created by yang on 2017/1/7.
@@ -21,7 +19,6 @@ public class LazyLoadFragment extends BaseFragment {
     /**
      * 是否已经加载数据了
      */
-    @State
     boolean isLoad = false;
 
     /**

@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.yang.yunfan.R;
 import com.yang.yunfan.utils.LogUtil;
 
-import icepick.Icepick;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -45,7 +44,6 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
         LogUtil.i(TAG + "------" + "onCreate");
     }
 
@@ -119,7 +117,6 @@ public class BaseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
         LogUtil.i(TAG + "------" + "onSaveInstanceState");
     }
 
@@ -240,7 +237,4 @@ public class BaseFragment extends Fragment {
             progressDialog = null;
         }
     }
-
-
-
 }

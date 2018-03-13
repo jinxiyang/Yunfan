@@ -19,7 +19,6 @@ import com.yang.yunfan.utils.FrescoUtil;
 
 import org.greenrobot.greendao.database.Database;
 
-import icepick.Icepick;
 
 /**
  * Created by yang on 2017/1/1.
@@ -64,9 +63,6 @@ public class AppApplication extends BaseApplication {
         saveMobileData = SaveMobileDataManager.isSave(this);
 
         initNetworkState();
-
-        //保存和恢复状态的日志
-        Icepick.setDebug(BuildConfig.DEBUG);
 
         FrescoUtil.init(getApplicationContext());
 

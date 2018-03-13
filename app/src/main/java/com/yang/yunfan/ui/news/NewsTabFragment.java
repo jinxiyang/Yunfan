@@ -30,7 +30,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import icepick.State;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,7 +39,6 @@ import rx.schedulers.Schedulers;
 public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListener {
     private static final String NEWS_TYPE = "news_type";
 
-    @State
     String mNewsType;
 
 
@@ -53,7 +51,6 @@ public class NewsTabFragment extends LazyLoadFragment implements OnRefreshListen
     @BindView(R.id.ll_neterror)
     LinearLayout llNeterror;
 
-    @State
     ArrayList<News> datas;
 
     private NewsListAdapter adapter;
